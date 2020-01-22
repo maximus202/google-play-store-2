@@ -7,14 +7,19 @@ describe('GET /apps test suite.', () => {
         return supertest(app)
             .get('/apps')
             .expect(200)
-            .expect('Content-Type', /json/);
+            .expect('Content-Type', /json/)
+            .then(res => {
+                expect(res).to.be.an('object');
+            })
     });
-    it('Should return sorted array of all apps if sorting by rating', () => {
+    it('Should return sorted array of all apps if sorting by Rating', () => {
         return supertest(app)
             .get('/apps')
-            .query({ sort: rating })
+            .query({ sort: Rating })
             .expect(200)
-            .expect()
+            .then(res => {
+
+            })
     });
     //Should return sorted array of all apps if sorting by app
     //Should return error if any other value other than rating or app is passed for sort
